@@ -71,8 +71,8 @@ function containing((mx, locations) :: Tuple{Int64, Array{Int64, 2}}) :: Int64
 end
 
 
-@time part1 = "input/input06.txt" |> parse_file |> locations |> areas |> values |> maximum
-@time part2 = "input/input06.txt" |> parse_file |> locations |> containing 
+@time part1 = "2018/input/input06.txt" |> parse_file |> locations |> areas |> values |> maximum
+@time part2 = "2018/input/input06.txt" |> parse_file |> locations |> containing 
 
 println("Part 1 : $(part1)")
 println("Part 2 : $(part2)")

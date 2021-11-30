@@ -69,8 +69,8 @@ function most_frequently(records :: Dict{Int, Array{Int64, 1}}) :: Int64
     return sguard * mmin 
 end
 
-@time part1 = "input/input04.txt" |> parse_file |> records |> sleepiest_guard
-@time part2 = "input/input04.txt" |> parse_file |> records |> most_frequently
+@time part1 = "2018/input/input04.txt" |> parse_file |> records |> sleepiest_guard
+@time part2 = "2018/input/input04.txt" |> parse_file |> records |> most_frequently
 
 println("Part 1 : $(part1)")
 println("Part 2 : $(part2)")

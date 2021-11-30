@@ -46,8 +46,8 @@ function common_between(arr :: Array{String, 1}) :: String
 end
 
 
-@time part1 = "input/input02.txt" |> parse_file |> count2and3
-@time part2 = "input/input02.txt" |> parse_file |> common_between
+@time part1 = "2018/input/input02.txt" |> parse_file |> count2and3
+@time part2 = "2018/input/input02.txt" |> parse_file |> common_between
 
 
 println("Part 1 : $(part1)")

@@ -23,7 +23,7 @@ function find_hz(arr :: Array{Int64, 1}) :: Int64
     return nothing
 end
 
-file_name = "input/input01.txt"
+file_name = "2018/input/input01.txt"
 
 @time part1 = reduce(+, parse_file(file_name))
 @time part2 = find_hz(parse_file(file_name))

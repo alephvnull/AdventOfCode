@@ -38,7 +38,7 @@ function not_overlap(  arr :: Array{String, 1},
 
 end
 
-parsed = "input/input03.txt" |> parse_file
+parsed = "2018/input/input03.txt" |> parse_file
 
 @time claim, part1 =  parsed |> intersections
 @time part2 = not_overlap(parsed, claim)

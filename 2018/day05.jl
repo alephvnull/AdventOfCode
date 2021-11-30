@@ -18,8 +18,8 @@ function full_react(polymer :: Array{Char,1}) :: Int64
     return mln
 end
 
-@time part1 = "input/input05.txt" |> polymer |> react |> join |> length 
-@time part2 = "input/input05.txt" |> polymer |> react |> full_react
+@time part1 = "2018/input/input05.txt" |> polymer |> react |> join |> length 
+@time part2 = "2018/input/input05.txt" |> polymer |> react |> full_react
 
 println("Part 1 : $(part1)")
 println("Part 2 : $(part2)")
