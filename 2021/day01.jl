@@ -9,23 +9,15 @@ function parse_file(file_path :: String) :: Array{Int64, 1}
 end
 
 function increases(ln :: Array{Int64, 1}) :: Int64
-    m = [ln[i] - ln[i-1] for i in 2:length(ln)]
-    return [x for x in m if x > 0] |> length
+    return [ 1 for i in 2:length(ln) if ln[i] > ln[i-1]] |> length
 end
 
-function threesumsplit(ln :: Array{Int64, 1}) :: Array{Int64,1}
-    Δ :: Array{Int64,1} = ln
-    s :: Array{Array{Int64,1}} = Array([])
-
-    while (length(Δ) != 2)
-        push!(s, [Δ[1],Δ[2], Δ[3]])
-        popfirst!(Δ)
-    end    
-    return sum.(s)   
+function threesumincreases(ln :: Array{Int64, 1}) :: Int64
+    return [ 1 for i in 4:length(ln) if ln[i] > ln[i-3]] |> length
 end
 
 @time part1 = "2021/input/input01.txt" |> parse_file |> increases
-@time part2 = "2021/input/input01.txt" |> parse_file |> threesumsplit |> increases
+@time part2 = "2021/input/input01.txt" |> parse_file |> threesumincreases 
 
 
 println("Part 1 : $(part1)")
