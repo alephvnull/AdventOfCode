@@ -8,23 +8,9 @@ function parse_file(file_path :: String) :: Array{Int64, 1}
     return ln
 end
 
-
 function increases(ln :: Array{Int64, 1}) :: Int64
-    m :: Int64 = 0
-    mprev :: Int64 = 0
-    for (i,x) in enumerate(ln)
-        
-        if i == 1
-            mprev = x
-            continue
-        end
-
-        mprev < x ? m+=1 : nothing
-
-        mprev = x
-    end
-    return m
-    
+    m = [ln[i] - ln[i-1] for i in 2:length(ln)]
+    return [x for x in m if x > 0] |> length
 end
 
 function threesumsplit(ln :: Array{Int64, 1}) :: Array{Int64,1}
