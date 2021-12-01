@@ -19,6 +19,5 @@ end
 @time part1 = "2021/input/input01.txt" |> parse_file |> increases
 @time part2 = "2021/input/input01.txt" |> parse_file |> threesumincreases 
 
-
 println("Part 1 : $(part1)")
 println("Part 2 : $(part2)")
