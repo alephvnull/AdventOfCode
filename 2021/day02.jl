@@ -4,8 +4,8 @@ function dive(ln :: Array{String,1}) :: Int64
     for line ∈ ln
         key, value = split(line, ' ')
         x = parse(Int64, value)
-        key == "forward" ? horizont += x : nothing
-        key == "down" ? depth += x : nothing
+        key == "forward" ? horizont += x : 
+        key == "down" ? depth += x : 
         key == "up" ? depth -= x : nothing
     end
     return depth * horizont 
@@ -18,8 +18,8 @@ function divewithaim(ln :: Array{String,1}) :: Int64
     for line ∈ ln
         key, value = split(line, ' ')
         x = parse(Int64, value)
-        key == "forward" ? (horizont += x, depth += aim * x) : nothing
-        key == "down" ? aim += x : nothing
+        key == "forward" ? (horizont += x, depth += aim * x) : 
+        key == "down" ? aim += x : 
         key == "up" ? aim -= x : nothing
     end
     return depth * horizont   
