@@ -2,7 +2,7 @@ function bitarrtoint(arr :: BitArray{1}) :: Int64
     return sum(arr .* (2 .^ collect(length(arr)-1:-1:0)))
 end
 
-function strtobintarr(str :: String) :: BitArray{1}
+function strtobinarr(str :: String) :: BitArray{1}
     return [parse(Int64, x) for x in str]
 end
 
@@ -39,8 +39,8 @@ function lifesupportrating(ln :: Array{String,1}) :: Int64
     oxygen   :: Function = ratingwrapper(true)
     scrubber :: Function = ratingwrapper(false)
 
-    x = oxygen(ln, true, 1)    |> strtobintarr |> bitarrtoint
-    y = scrubber(ln, false, 1) |> strtobintarr |> bitarrtoint
+    x :: Int64 = oxygen(ln, true, 1)    |> strtobinarr |> bitarrtoint
+    y :: Int64 = scrubber(ln, false, 1) |> strtobinarr |> bitarrtoint
 
     return x * y
 end
