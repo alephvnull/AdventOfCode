@@ -1,6 +1,6 @@
-function dive(ln :: Array{String,1}) :: Int64
-    depth    :: Int64 = 0
-    horizont :: Int64 = 0
+function dive(ln)
+    depth    = 0
+    horizont = 0
     for line ∈ ln
         key, value = split(line, ' ')
         x = parse(Int64, value)
@@ -11,10 +11,10 @@ function dive(ln :: Array{String,1}) :: Int64
     return depth * horizont 
 end
 
-function divewithaim(ln :: Array{String,1}) :: Int64
-    aim      :: Int64 = 0
-    depth    :: Int64 = 0
-    horizont :: Int64 = 0
+function divewithaim(ln)
+    aim       = 0
+    depth     = 0
+    horizont  = 0
     for line ∈ ln
         key, value = split(line, ' ')
         x = parse(Int64, value)
@@ -25,8 +25,8 @@ function divewithaim(ln :: Array{String,1}) :: Int64
     return depth * horizont   
 end
 
-@time part1 = "2021/input/input02.txt" |> readlines |> dive
-@time part2 = "2021/input/input02.txt" |> readlines |> divewithaim
+@time part1 = "data/2021/input02.txt" |> readlines |> dive
+@time part2 = "data/2021/input02.txt" |> readlines |> divewithaim
 
 println("Part 1 : $(part1)")
 println("Part 2 : $(part2)")
