@@ -2,10 +2,6 @@ function bitarrtoint(arr :: BitArray{1}) :: Int64
     return sum(arr .* (2 .^ collect(length(arr)-1:-1:0)))
 end
 
-function strtobinarr(str :: String) :: BitArray{1}
-    return [parse(Int64, x) for x in str]
-end
-
 function powerconsumption(ln :: Array{String,1}) :: Int64
     len :: Int64 = length(ln)
     binarr :: Array{Int64, 1} = zeros(Int64, 12)
@@ -39,8 +35,8 @@ function lifesupportrating(ln :: Array{String,1}) :: Int64
     oxygen   :: Function = ratingwrapper(true)
     scrubber :: Function = ratingwrapper(false)
 
-    x :: Int64 = oxygen(ln, true, 1)    |> strtobinarr |> bitarrtoint
-    y :: Int64 = scrubber(ln, false, 1) |> strtobinarr |> bitarrtoint
+    x :: Int64 = parse(Int64, oxygen(ln, true, 1),    base = 2)
+    y :: Int64 = parse(Int64, scrubber(ln, false, 1), base = 2)
 
     return x * y
 end
