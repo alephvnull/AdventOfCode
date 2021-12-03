@@ -1,23 +1,23 @@
-function bitarrtoint(arr :: BitArray{1}) :: Int64
+function bitarrtoint(arr)
     return sum(arr .* (2 .^ collect(length(arr)-1:-1:0)))
 end
 
-function powerconsumption(ln :: Array{String,1}) :: Int64
-    len :: Int64 = length(ln)
-    binarr :: Array{Int64, 1} = zeros(Int64, 12)
+function powerconsumption(ln)
+    len    = length(ln)
+    binarr = zeros(Int64, 12)
     for ii in ln
         for (oo,xx) in enumerate(ii)
             binarr[oo] += parse(Bool, xx)
         end
     end
-    γ :: BitArray{1} = (binarr ./ len) .|> x -> x > 0.5 ? true : false
+    γ = (binarr ./ len) .|> x -> x > 0.5 ? true : false
     return bitarrtoint(γ) * bitarrtoint(.!γ)
 end
 
-function ratingwrapper(pref :: Bool) :: Function
-    function reccheck(ln :: Array{String,1}, bit :: Bool, pos :: Int64) :: String
-        sbit    :: Bool = false
-        arr     :: Array{String, 1} = Array([])
+function ratingwrapper(pref)
+    function reccheck(ln, bit, pos)
+        sbit = false
+        arr  = Array([])
 
         sum([parse(Bool, ii[pos]) for ii in ln]) >= (length(ln) / 2) ? 
         sbit = pref : sbit = !pref
@@ -31,18 +31,18 @@ function ratingwrapper(pref :: Bool) :: Function
     return reccheck
 end
 
-function lifesupportrating(ln :: Array{String,1}) :: Int64
-    oxygen   :: Function = ratingwrapper(true)
-    scrubber :: Function = ratingwrapper(false)
+function lifesupportrating(ln)
+    oxygen   = ratingwrapper(true)
+    scrubber = ratingwrapper(false)
 
-    x :: Int64 = parse(Int64, oxygen(ln, true, 1),    base = 2)
-    y :: Int64 = parse(Int64, scrubber(ln, false, 1), base = 2)
+    x = parse(Int64, oxygen(ln, true, 1),    base = 2)
+    y = parse(Int64, scrubber(ln, false, 1), base = 2)
 
     return x * y
 end
 
-@time part1 = "2021/input/input03.txt" |> readlines |> powerconsumption
-@time part2 = "2021/input/input03.txt" |> readlines |> lifesupportrating
+@time part1 = "data/2021/input03.txt" |> readlines |> powerconsumption
+@time part2 = "data/2021/input03.txt" |> readlines |> lifesupportrating
 
 println("Part 1 : $(part1)")
 println("Part 2 : $(part2)")
