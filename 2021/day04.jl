@@ -1,15 +1,15 @@
 function single_bingo_sets(input)
     xx = Array([])
-    yy = zeros(Int64, 5, 5)
+    yy = zeros(Int, 5, 5)
     oo = 1
     for ii in input
         if ii == "" 
             push!(xx,yy)
-            yy = zeros(Int64, 5, 5)
+            yy = zero(yy)
             oo = 1
             continue
         end
-        yy[oo,1:end] = parse.(Int64, split(ii, " ", keepempty = false))
+        yy[oo,1:end] = parse.(Int, split(ii, " ", keepempty = false))
         oo+=1
     end
     return xx
@@ -17,14 +17,17 @@ end
 
 function rowsandcol(matrix)
     xx = Array([])
-    dimx, dimy = size(matrix)
-    for ii in 1:dimx
+    for ii in 1:5
         push!(xx, matrix[ii, 1:end])
-    end
-    for ii in 1:dimy
         push!(xx, matrix[1:end, ii])
     end
     return xx
+end
+
+function data_parse(input)
+    drawn = parse.(Int,split(input[1], ","))
+    sets = input[3:end] |> single_bingo_sets .|> rowsandcol
+    return drawn, sets
 end
 
 function winingqueue(ff, bingosets,drawn)
@@ -35,32 +38,23 @@ function winingqueue(ff, bingosets,drawn)
         vec = Array([])
         for rorc in set
             match = filter( x -> x ≠ nothing, indexin(rorc, drawn))
-            length(match) == 5 ? push!(vec, match) : continue
+            length(match) != 5 ? continue :
+            push!(vec, match) 
             push!(sums, max(match...))
         end
         locmin = argmin(sums)
         push!(minvec, vec[locmin])
         push!(minsum, sums[locmin])
-        
     end
     ptr = ff(minsum)
     seq = minvec[ptr]
     return (ptr, seq)
 end
 
-function data_parse(input)
-    drawn = parse.(Int64,split(input[1], ","))
-    sets = input[3:end] |> single_bingo_sets .|> rowsandcol
-
-    return drawn, sets
-end
-
 function findbingo(ff, drawn,sets)
-    
     (p, v) = winingqueue(ff, sets, drawn)
-
-    return (sum(filter(x -> !(x in drawn[1:max(v...)]), unique(vcat(sets[p]...))))) * getindex(drawn,v)[argmax(v)]
-
+    kk = getindex(drawn,v)[argmax(v)]
+    return sum(filter(x -> !(x in drawn[1:max(v...)]), unique(vcat(sets[p]...)))) * kk
 end
 
 drawn, sets = "data/2021/input04.txt" |> readlines |> data_parse
