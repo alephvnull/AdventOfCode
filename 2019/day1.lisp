@@ -1,6 +1,6 @@
 ;;;Day 1
 (format t "Day 1~%")
-(defvar *filename* 'day1/input.md )
+(defvar *filename* "data/2019/input01.txt" )
 
 (defun open-file (filename)
   (open filename :if-does-not-exist nil))
@@ -25,8 +25,7 @@
 (defun day1-first ()
   (format t "First: ~d~%" (sum-of-fuel (get-input))))
 
-
-(day1-first)
+(time (day1-first))
 
 (defun correction (value)
   (- (sum-of-fuels value) value))
@@ -41,5 +40,5 @@
 (defun day1-second ()
   (format t "~%Second: ~d~%" (reduce #'+ (mapcar #'correction (get-input)))))
 
-(day1-second)
+(time (day1-second))
 
