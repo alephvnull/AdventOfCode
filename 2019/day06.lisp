@@ -1,7 +1,3 @@
-;; Day 6
-
-;;***FIRST***
-
 (defun open-file (filename)
   "Open a file"
   (open filename :if-does-not-exist nil))
@@ -17,8 +13,6 @@
 	    (intern ( subseq s (1+ (position #\) s))))))
       '()))
 
-
-
 (defun read-file (inx)
   "read file"
   (when inx
@@ -27,9 +21,7 @@
 		    collect line)))
 
 
-(defvar *input* (read-file (open-file 'day6/input.md)))
-
-(defvar *test* (read-file (open-file 'day6/test.md)))
+(defvar *input* (read-file (open-file "data/2019/input06.txt")))
 
 (defun count-orbits (mp start)
   (loop :for i := (gethash start mp nil)
