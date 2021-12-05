@@ -1,6 +1,3 @@
-;;Day 7
-
-
 (defun all-permutations (list)
   "all posible permutations"
   (cond ((null list) nil)
@@ -201,7 +198,7 @@
 (clean-memory)
 
 (defvar *lst1* (all-permutations '(0 1 2 3 4)))
-(defvar in (open-file 'day7/input.md))
+(defvar in (open-file "data/2019/input07.txt"))
 (defvar *programe*  (parse-string (car (read-file in))))
 
 
