@@ -1,6 +1,6 @@
 ;;Day 12
 (format t "Day 12~%")
-(defparameter *filename* 'day12/input.md)
+(defparameter *filename* "data/2019/input12.txt")
 
 (defun flatten (lst &optional stack out)
   (cond ((consp lst) (flatten (rest lst) (cons (first lst) stack) out))
