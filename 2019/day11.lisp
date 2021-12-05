@@ -1,6 +1,6 @@
 ;iDay 11
 (format t "Day 11~%")
-(defvar *filename* 'day11/input.md)
+(defvar *filename* "data/2019/input11.txt")
 
 (defun open-file (filename)
   (open filename :if-does-not-exist nil))
