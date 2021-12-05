@@ -1,11 +1,8 @@
-;;DAY 4
 (format t "Day 4~%")
 
-(defvar *start* 171309)
-(defvar *finish* 643603)
+(defvar *start* 387638)
+(defvar *finish* 919123)
 
-
-   
 (defun sorted (lst predicate) (apply predicate lst))
    
 (defun get-seq (num)
