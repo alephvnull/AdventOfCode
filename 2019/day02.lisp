@@ -1,11 +1,8 @@
-;;;Day 2
 (format t "Day 2~%")
-(defvar *filename* 'day2/input.md)
-
+(defvar *filename* "data/2019/input02.txt")
 
 (defun open-file (filename)
   (open filename :if-does-not-exist nil))
-
 
 (defun read-file (inx)
   (when inx
