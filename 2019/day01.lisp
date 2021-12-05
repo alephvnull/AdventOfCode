@@ -1,4 +1,3 @@
-;;;Day 1
 (format t "Day 1~%")
 (defvar *filename* "data/2019/input01.txt" )
 
