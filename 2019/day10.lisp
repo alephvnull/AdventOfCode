@@ -1,6 +1,6 @@
 ;;Day 10
 (format t "Day 10")
-(defvar *filename* 'day10/day10.lisp)
+(defvar *filename* "data/2019/input10.txt")
 (setq *read-default-float-format* 'long-float)
 
 (defun open-file (filename)
@@ -110,7 +110,7 @@
 	:in lst
 	:collect (length-of-unique i lst)))
 
-(defvar *count* (get-visible (flat-vtr (get-coordinates (open-and-read 'day10/input.md)))))
+(defvar *count* (get-visible (flat-vtr (get-coordinates (open-and-read *filename*)))))
 
 ;(defvar *biggest* (loop :for i
 ;	     :in (get-visible (flat-vtr (get-coordinates (open-and-read 'day10/input.md))))
