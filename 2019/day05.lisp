@@ -1,6 +1,5 @@
-;;;Day 5
 (format t "Day 5~%")
-(defvar *filename* 'day5/input.md)
+(defvar *filename* "data/2019/input05.txt")
 
 
 (defun open-file (filename)
