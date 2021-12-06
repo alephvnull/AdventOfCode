@@ -11,7 +11,7 @@ function simulation(values, days)
     sum(nums)
 end
 
-input = parse.(Int, split(readlines("data/2021/input06.txt")[1],","))
+const input = parse.(Int, split(readlines("data/2021/input06.txt")[1],","))
 
 @time part1 = simulation(input, 80)
 @time part2 = simulation(input, 256)
