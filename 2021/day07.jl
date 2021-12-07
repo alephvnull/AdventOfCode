@@ -5,7 +5,7 @@ ff2(x,y) = abs.(x .- y) .* ((abs.(x.-y).+1) .* 0.5)
 
 function align(ff, positions)
     minval = Inf
-    for position in 1:max(positions...)
+    for position ∈ 1:max(positions...)
         minloc = ff(positions,position) |> sum
         minloc < minval ? (minval = minloc) : nothing
     end
