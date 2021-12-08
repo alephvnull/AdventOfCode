@@ -1,4 +1,4 @@
-const input = split.(readlines("data/2021/input08.txt")[1:end],"|")
+const input = split.(readlines("data/2021/input08.txt"),"|")
 
 function output_values(input)
     count = 0
