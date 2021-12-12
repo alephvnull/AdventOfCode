@@ -9,7 +9,7 @@ end
 
 function graph(input)
     links = Dict()
-    for (from, to) in split.(input,"-")
+    for (from, to) ∈ split.(input,"-")
         link!(links,from,to)
         link!(links,to,from) 
     end
@@ -17,11 +17,10 @@ function graph(input)
 end
 
 function count_paths(links, vv, visited, from, to)
-    ★ == vv
+    ★ = vv
     from == to ? (return 1) : nothing
-    if from in visited
-        ★ || from == "start" ? (return 0) : nothing
-        ★ = true
+    if from ∈ visited
+        ★ || from == "start" ? (return 0) : ★ = true
     end
     map(links[from]) do next
         count_paths(links, ★, (small_cave(from) ? vcat(visited,from) : visited), next, to )
