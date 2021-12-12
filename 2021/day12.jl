@@ -17,13 +17,14 @@ function graph(input)
 end
 
 function count_paths(links, vv, visited, from, to)
+    ★ == vv
     from == to ? (return 1) : nothing
     if from in visited
-        vv || from == "start" ? (return 0) : nothing
-        vv = true
+        ★ || from == "start" ? (return 0) : nothing
+        ★ = true
     end
     map(links[from]) do next
-        count_paths(links, vv, (small_cave(from) ? vcat(visited,from) : visited), next, to )
+        count_paths(links, ★, (small_cave(from) ? vcat(visited,from) : visited), next, to )
     end |> sum  
 end
 
