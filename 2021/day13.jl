@@ -36,13 +36,13 @@ end
 
 function code(paper, instructions)
     for ii ∈ instructions 
-        fold_set!(paper, split(ii,"="))
+        fold_set(paper, split(ii,"="))
     end
     print_code(paper)
 end
 
 
-@time part1 = length(fold_set!(make_paper(points),split(instructions[1],"=")))
+@time part1 = length(fold_set(make_paper(points),split(instructions[1],"=")))
 
 println("Part 1 : $(part1)")
 
