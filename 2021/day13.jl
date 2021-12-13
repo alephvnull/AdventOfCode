@@ -1,53 +1,51 @@
-input = readlines("data/2021/input13.txt")
+const input = readlines("data/2021/input13.txt")
 
-points = input[1:839]
-instructions = input[841:end]
-
-println(instructions)
-
-function fold_set!(st, (comm, val))
-    vv = parse(Int,val)
-    if comm == "fold along x"
-        for (x,y) in st
-            if x > vv
-                push!(st, (vv - (x - vv),y))
-                delete!(st, (x,y))
-            end
-        end
-    else
-        for (x,y) in st
-            if y < -vv
-                push!(st, (x,-vv + (-vv - y)))
-                delete!(st, (x,y))
-            end
-        end
-    end
-end
+const points = input[1:839]
+const instructions = input[841:end]
 
 function print_code(st)
-    zz = zeros(Int, 40, 10)
-
+    zz = fill(" ",40,10)
     for (x,y) in st
-        zz[x+1,y+10] = 1
+        zz[x+1,y+10] = "\u001b[31m#"
     end
-    for i in 1:40
-        println(zz[i, 5:end])
-
+    for i in reverse(5:10)
+        println(reduce(*, zz[1:end, i]))
     end
 end
 
-function sol()
-    st = Set()
+fold_along_x(paper, x,y, vv) = x > vv ? push!(paper, (2vv - x,y)) : nothing
+fold_along_y(paper, x,y, vv) = y < -vv ? push!(paper, (x, -2vv - y)) : nothing
+
+fold_along(test) = test == "fold along x" ? fold_along_x : fold_along_y
+
+function fold_set!(paper, (comm, val))
+    vv = parse(Int,val)
+    for (x,y) in paper
+        fold_along(comm)(paper, x,y, vv) ≠ nothing ? delete!(paper, (x,y)) : nothing
+    end
+    paper
+end
+
+function make_paper(points)
+    paper = Set()
     for pt in points
         x,y = parse.(Int,(split(pt, ",")))
-        push!(st, (x,-y))
+        push!(paper, (x,-y))
     end
-
-    for ii in instructions 
-        fold_set!(st, split(ii,"="))
-    end
-    println(length(st))
-    print_code(st)
+    paper
 end
 
-sol()
+function code(paper, instructions)
+    for ii in instructions 
+        fold_set!(paper, split(ii,"="))
+    end
+    print_code(paper)
+end
+
+
+@time part1 = length(fold_set!(make_paper(points),split(instructions[1],"=")))
+
+println("Part 1 : $(part1)")
+
+@time code(make_paper(points), instructions)
+
