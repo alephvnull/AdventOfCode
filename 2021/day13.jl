@@ -45,6 +45,7 @@ end
 @time part1 = length(fold_set(make_paper(points),split(instructions[1],"=")))
 
 println("Part 1 : $(part1)")
+println("Part 2 :")
 
 @time code(make_paper(points), instructions)
 
