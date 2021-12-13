@@ -17,7 +17,7 @@ fold_along_y(paper, x,y, vv) = y < -vv ? push!(paper, (x, -2vv - y)) : nothing
 
 fold_along(test) = test == "fold along x" ? fold_along_x : fold_along_y
 
-function fold_set!(paper, (comm, val))
+function fold_set(paper, (comm, val))
     vv = parse(Int,val)
     for (x,y) ∈ paper
         fold_along(comm)(paper, x,y, vv) ≠ nothing ? delete!(paper, (x,y)) : nothing
