@@ -12,12 +12,12 @@ function print_code(st)
     end
 end
 
-fold_along_x(paper, x,y, vv) = x > vv ? push!(paper, (2vv - x,y)) : nothing
-fold_along_y(paper, x,y, vv) = y < -vv ? push!(paper, (x, -2vv - y)) : nothing
+fold_along_x!(paper, x,y, vv) = x > vv ? push!(paper, (2vv - x,y)) : nothing
+fold_along_y!(paper, x,y, vv) = y < -vv ? push!(paper, (x, -2vv - y)) : nothing
 
-fold_along(test) = test == "fold along x" ? fold_along_x : fold_along_y
+fold_along(test) = test == "fold along x" ? fold_along_x! : fold_along_y!
 
-function fold_set(paper, (comm, val))
+function fold_set!(paper, (comm, val))
     vv = parse(Int,val)
     for (x,y) ∈ paper
         fold_along(comm)(paper, x,y, vv) ≠ nothing ? delete!(paper, (x,y)) : nothing
@@ -36,13 +36,13 @@ end
 
 function code(paper, instructions)
     for ii ∈ instructions 
-        fold_set(paper, split(ii,"="))
+        fold_set!(paper, split(ii,"="))
     end
     print_code(paper)
 end
 
 
-@time part1 = length(fold_set(make_paper(points),split(instructions[1],"=")))
+@time part1 = length(fold_set!(make_paper(points),split(instructions[1],"=")))
 
 println("Part 1 : $(part1)")
 println("Part 2 :")
