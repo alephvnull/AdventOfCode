@@ -34,7 +34,7 @@ function make_paper(points)
     paper
 end
 
-function code(paper, instructions)
+function code!(paper, instructions)
     for ii ∈ instructions 
         fold_set!(paper, split(ii,"="))
     end
@@ -47,5 +47,5 @@ end
 println("Part 1 : $(part1)")
 println("Part 2 :")
 
-@time code(make_paper(points), instructions)
+@time code!(make_paper(points), instructions)
 
