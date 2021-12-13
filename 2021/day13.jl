@@ -1,14 +1,13 @@
 const input = readlines("data/2021/input13.txt")
-
 const points = input[1:839]
 const instructions = input[841:end]
 
 function print_code(st)
     zz = fill(" ",40,10)
-    for (x,y) in st
+    for (x,y) ∈ st
         zz[x+1,y+10] = "\u001b[31m#"
     end
-    for i in reverse(5:10)
+    for i ∈ reverse(5:10)
         println(reduce(*, zz[1:end, i]))
     end
 end
@@ -20,7 +19,7 @@ fold_along(test) = test == "fold along x" ? fold_along_x : fold_along_y
 
 function fold_set!(paper, (comm, val))
     vv = parse(Int,val)
-    for (x,y) in paper
+    for (x,y) ∈ paper
         fold_along(comm)(paper, x,y, vv) ≠ nothing ? delete!(paper, (x,y)) : nothing
     end
     paper
@@ -28,7 +27,7 @@ end
 
 function make_paper(points)
     paper = Set()
-    for pt in points
+    for pt ∈ points
         x,y = parse.(Int,(split(pt, ",")))
         push!(paper, (x,-y))
     end
@@ -36,7 +35,7 @@ function make_paper(points)
 end
 
 function code(paper, instructions)
-    for ii in instructions 
+    for ii ∈ instructions 
         fold_set!(paper, split(ii,"="))
     end
     print_code(paper)
