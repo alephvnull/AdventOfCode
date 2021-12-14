@@ -1,8 +1,9 @@
-input = readlines("data/2021/input14.txt")
+const input = readlines("data/2021/input14.txt")
 
-template = input[1]
-rules = input[3:end]
+const template = input[1]
+const rules = input[3:end]
 
+subtract(x) = max(values(x)...)-min(values(x)...)
 
 function link(rules)
     links = Dict()
@@ -12,30 +13,27 @@ function link(rules)
     links
 end
 
-function pair(template)
-    pairs = Dict()
-    for i in 1:length(template)-1
-        pair = template[i:i+1]
-        !haskey(pairs, pair) ? push!(pairs, pair => 0) : nothing
-        pairs[pair] +=1
-    end
-    pairs
-end
-
 function mod!(dict, k, v)
     !haskey(dict, k) ? push!(dict, k => 0) : nothing
     dict[k] += v
 end
 
+function pair(template)
+    pairs = Dict()
+    for i ∈ 1:length(template)-1
+        pair = template[i:i+1]
+        mod!(pairs, pair, 1)
+    end
+    pairs
+end
+
 function polymer(pairs, links)
     new = Dict()
-    for (pair,value) in pairs
-        if pair in keys(links)
+    for (pair,value) ∈ pairs
+        if pair ∈ keys(links)
             vv = links[pair]
             mod!(new, pair[1] * vv, value)
             mod!(new, vv * pair[2], value)
-        else
-            mod!(new, pair, value )
         end
     end
     new 
@@ -43,8 +41,8 @@ end
 
 function gletters(pairs)
     letters = Dict()
-    for (k,v) in pairs
-        mod!(letters, k[1] ,v)
+    for (pair,value) ∈ pairs
+        mod!(letters, pair[1] ,value)
     end
     letters[template[end]] += 1
     letters
@@ -53,13 +51,10 @@ end
 function simulate(steps)
     links = link(rules)
     pairs = pair(template)
-
-    for _ in 1:steps
+    for _ ∈ 1:steps
         pairs = polymer(pairs, links)
     end
-
-    letters = gletters(pairs)
-    max(values(letters)...)-min(values(letters)...)
+    gletters(pairs) |> subtract
 end
 
 @time part1 = simulate(10)
