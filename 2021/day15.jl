@@ -21,7 +21,7 @@ function dijkstra(input)
         (xx, yy), len = dequeue_pair!(queue)
         push!(visited, (xx, yy))
         (xx, yy) == (height, width) ? (return len) : nothing
-        for (nxx, nyy) in adjacent(xx,yy)
+        for (nxx, nyy) ∈ adjacent(xx,yy)
             if (nxx, nyy) ∉ visited
                 newlen = len + input[nxx, nyy]
                 newlen < get(queue, (nxx, nyy), Inf) ? queue[(nxx, nyy)] = newlen : nothing
