@@ -12,7 +12,7 @@ transform(x) = ([
         x.+4 x.+5 x.+6 x.+7 x.+8
     ] .- 1) .% 9 .+ 1
 
-function dijkstra(input)
+function shortest(input)
     height, width = size(input)
     adjacent(x,y) = [(x,y).+adj for adj ∈ adjset if x+adj[1] ∈ 1:height && y+adj[2] ∈ 1:width]
 
@@ -31,6 +31,5 @@ function dijkstra(input)
     end
 end
 
-@time input |> dijkstra |> printsol(1) 
-@time input |> transform |> dijkstra |> printsol(2) 
-
+@time input |> shortest |> printsol(1) 
+@time input |> transform |> shortest |> printsol(2) 
