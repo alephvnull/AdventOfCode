@@ -1,5 +1,6 @@
 using DataStructures
 
+printsol(part) = x -> "Part $(part) : $(x)" |> println
 const input = parse.(Int, reduce(hcat, collect.(readlines("data/2021/input15.txt"))))
 const adjset  = [(-1,0),(1,0), (0,-1),(0,1)]
 
@@ -30,6 +31,6 @@ function dijkstra(input)
     end
 end
 
-@time input |> dijkstra |> println
-@time input |> transform |> dijkstra |> println
+@time input |> dijkstra |> printsol(1) 
+@time input |> transform |> dijkstra |> printsol(2) 
 
