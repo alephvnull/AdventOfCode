@@ -28,20 +28,20 @@ function parse_value(inp)
 end
 
 function parse_operator(inp)
-    packet, ii, vec, sum = inp, inp[1], [], 0
+    packet, I, vec, sum = inp, inp[1], [], 0
     packet = cutoff(inp, 2)
-    if ii == '0'
-        ll, packet = packet[1:15], cutoff(packet,16)
-        subs = packet[1:bit2int(ll)]
+    if I == '0'
+        L, packet = packet[1:15], cutoff(packet,16)
+        subs = packet[1:bit2int(L)]
         while !isempty(subs)
             subs,val, dd = packetaize(subs)
             sum += val
             push!(vec, dd)
         end
-        cutoff(packet, bit2int(ll)+1), sum, vec
+        cutoff(packet, bit2int(L)+1), sum, vec
     else      
-        ll,packet = packet[1:11],cutoff(packet,12)
-        for _ ∈ 1:bit2int(ll)
+        L,packet = packet[1:11],cutoff(packet,12)
+        for _ ∈ 1:bit2int(L)
             packet,val, dd = packetaize(packet[1:end])
             sum += val
             push!(vec, dd)
