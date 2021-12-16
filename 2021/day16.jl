@@ -19,39 +19,34 @@ op = Dict(
 )
 
 function parse_value(inp)
-    oo, num = inp, ""
-    while oo[1] == '1' 
-        num *= oo[2:5]
-        oo = cutoff(oo,6)
+    packet, num = inp, ""
+    while packet[1] == '1' 
+        num *= packet[2:5]
+        packet = cutoff(packet,6)
     end
-    num *= oo[2:5]
-    oo = cutoff(oo,6)
-    oo, parse(Int, num, base = 2)
+    cutoff(packet,6), bit2int(num * packet[2:5])
 end
 
 function parse_operator(inp)
-    xx, ii, vec, sum = inp, inp[1], [], 0
-    xx = cutoff(inp, 2)
+    packet, ii, vec, sum = inp, inp[1], [], 0
+    packet = cutoff(inp, 2)
     if ii == '0'
-        ll = xx[1:15]
-        xx = cutoff(xx,16)
-        subs = xx[1:bit2int(ll)]
+        ll, packet = packet[1:15], cutoff(packet,16)
+        subs = packet[1:bit2int(ll)]
         while !isempty(subs)
             subs,val, dd = packetaize(subs)
             sum += val
             push!(vec, dd)
         end
-        xx[bit2int(ll)+1:end], sum, vec
-
+        cutoff(packet, bit2int(ll)+1), sum, vec
     else      
-        ll = xx[1:11]
-        xx = cutoff(xx,12)
+        ll,packet = packet[1:11],cutoff(packet,12)
         for _ ∈ 1:parse(Int, ll, base = 2)
-            xx,val, dd = packetaize(xx[1:end])
+            packet,val, dd = packetaize(packet[1:end])
             sum += val
             push!(vec, dd)
         end
-        xx, sum, vec
+        packet, sum, vec
     end
 end
 
