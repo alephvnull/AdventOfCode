@@ -41,7 +41,7 @@ function parse_operator(inp)
         cutoff(packet, bit2int(ll)+1), sum, vec
     else      
         ll,packet = packet[1:11],cutoff(packet,12)
-        for _ ∈ 1:parse(Int, ll, base = 2)
+        for _ ∈ 1:bit2int(ll)
             packet,val, dd = packetaize(packet[1:end])
             sum += val
             push!(vec, dd)
@@ -56,7 +56,7 @@ function packetaize(inp)
     T = packet[4:6]
     packet = cutoff(packet,7)
     if T == "100"       
-        packet, val= parse_value(packet)            
+        packet, val = parse_value(packet)            
     else
         packet, sum, vec = parse_operator(packet) 
         val = op[bit2int(T)](vec)            
