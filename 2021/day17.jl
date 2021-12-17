@@ -7,7 +7,7 @@ inbox(x,y) = xmin ≤ x ≤ xmax && ymin ≤ y ≤ ymax
 
 function shoot()
     mx,c = -Inf,0
-    for vyy in -300:300, vxx in 1:300
+    for vyy ∈ -300:300, vxx ∈ 1:300
         sxx, syy, lmx,inbx ,i = 0, 0, -Inf, false, 0
         while true
             i += 1
