@@ -11,13 +11,13 @@ const input = readlines("data/2021/input19.txt")
 
 manhattan(p1,p2) = sum(abs.(p1-p2))
 
-translate(st, off) = Set([[s[i] + off[i] for i in 1:3]  for s in st ])
+translate(st, off) = Set([[s[i] + off[i] for i ∈ 1:3]  for s ∈ st ])
 
 function allrotatedsets(stx)
     sets = []
-    for rot in xr 
+    for rot ∈ xr 
         st = Set()
-        for (x,y,z) in stx
+        for (x,y,z) ∈ stx
             push!(st, rot(x,y,z))
         end 
         push!(sets, st)
@@ -28,7 +28,7 @@ end
 function getsets(input)
     sets = []
     st = Set()
-    for line in input
+    for line ∈ input
         if line == ""
             push!(sets, st)
             st = Set()
@@ -45,20 +45,20 @@ end
 const sets = getsets(input)
 const mset = Dict([i => allrotatedsets(s) for (i,s) ∈ enumerate(sets)])
 
-perms(o) = [(s,m) for s in values(o) for m in values(o) if values(s) != values(m) ]
-dmax(o) = maximum([manhattan(a, b) for (a, b) in perms(o)])
+perms(o) = [(s,m) for s ∈ values(o) for m ∈ values(o) if s ≠ m ]
+dmax(o) = maximum([manhattan(a, b) for (a, b) ∈ perms(o)])
 
 function fold()
     fixed = Set([sets[1]])
     off = Dict([1 => [0,0,0]])
     while length(fixed) ≠ length(sets)
-    for (i,s) in enumerate(sets)
+    for (i,s) ∈ enumerate(sets)
         s ∈ fixed ? continue : nothing
-        fixed_bacons = reduce(union, fixed)
-        for rs in mset[i], fb in fixed_bacons, sb in rs
+        bacons = reduce(union, fixed)
+        for rs ∈ mset[i], fb ∈ bacons, sb ∈ rs
             offset = [fb[1] - sb[1], fb[2] - sb[2], fb[3] - sb[3]]
             shifted = translate(rs, offset)
-            if length(shifted ∩ fixed_bacons) >= 12 
+            if length(shifted ∩ bacons) >= 12 
                 push!(fixed, shifted) 
                 push!(off, i => offset)
                 break
