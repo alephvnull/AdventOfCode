@@ -10,9 +10,7 @@ const image = Dict((i,j) => (char == '#' ? "1" : "0")
     for (j,char) ∈ enumerate(row)
 )
 
-const adjset = [(-1,-1), (-1,0), (-1,1), 
-                (0, -1), (0, 0), (0, 1), 
-                (1, -1), (1, 0), (1, 1)]
+const adjset = [(i,j) for i ∈ -1:1 for j ∈ -1:1]
 
 adjacent(x,y) = [(x,y) .+ adj for adj ∈ adjset]
 
