@@ -1,7 +1,7 @@
 input = readlines("data/2021/input20.txt")
 
 const Δ = Dict([i-1 => (x == "#" ? "1" : "0") for (i,x) ∈ enumerate(split(input[1], ""))])
-const α = Δ[0] == "1" && Δ[511] == "0"
+const δ = Δ[0] == "1" && Δ[511] == "0"
 
 bit2int(x) = Δ[parse(Int, reduce(*, x), base = 2)]
 
@@ -27,7 +27,7 @@ function process(step)
         for rw ∈ mini:maxi, cl ∈ minj:maxj
             push!(nimage, (rw,cl) => mask(cp, rw, cl, def))
         end
-        α ? def = (def == "0" ? "1" : "0") : nothing
+        δ ? def = (def == "0" ? "1" : "0") : nothing
         cp = nimage
     end
     sum(parse.(Int,values(cp)))
