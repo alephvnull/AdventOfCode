@@ -71,18 +71,3 @@ function fold()
 end
 
 @time fold() |> x -> "Part 1 : $(x[1])\nPart 2 : $(x[2])" |> println
-
-
-
-
-# println(hcat([-4:-1], [1:4]))
-
-# x1 = Set([Set([1,1,23])])
-# x2 = Set([Set([1,1,23]), Set([4,1,23])])
-
-# println([x for x in x1][1])
-
-# println(reduce(union ,x1))
-
-#fold()
-
