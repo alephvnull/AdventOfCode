@@ -10,7 +10,7 @@ const p0 = (9,4)
 
 (t, (s1, s2)) = findwin(p0, 0, (0,0))
 
-s1 > s2 ? scoreat(p0, 0, (0,0), t-1)[2] * ((t-1) * 6 + 3) : s1 * t * 6 |> println
+s1 > s2 ? scoreat(p0, 0, (0,0), t-1)[2] * ((t-1) * 6 + 3) : s1 * t * 6 |> x-> "p1: $(x)"|> println
 
 offmod(x) = (x-1)%10 +1
 
@@ -28,7 +28,4 @@ function findallwin(p0, s, i)
     end |> sum
 end
 
-@time findallwin(p0,(0,0), 0) |> println
-
-
-
+@time findallwin(p0,(0,0), 0) |> x-> "p2: $(x)" |> println
