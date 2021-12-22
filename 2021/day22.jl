@@ -18,11 +18,7 @@ end
 
 vol((x,y,z)) = [x,y,z] .|> length |> prod
 
-function subr(crange, low, high)
-    c0,c1 = crange[1], crange[end]
-    c1 < low ||  c0 > high ? (return []) : 
-    min(max(c0, low), high):min(max(c1, low), high)
-end
+subr(r,l,h) = r[end] < l || r[1] > h ? (return []) : min(max(r[1], l), h):min(max(r[end], l), h)
 
 function ovrlp((x,y,z), rest)
     overlap = []
