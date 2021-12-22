@@ -31,20 +31,20 @@ function ovrlp((x,y,z), rest)
         sx = subr(rx, x[1], x[end])
         sy = subr(ry, y[1], y[end])
         sz = subr(rz, z[1], z[end])
-        sx ⩣ 0 || sy ⩣ 0 || sz ⩣ 0 ? continue : nothing
+        sx ⩣ 0 || sy ⩣ 0 || sz ⩣ 0 ? continue : 
         push!(overlap, (op, sx, sy, sz))
     end
     overlap
 end
 
-function countincube(step, rest)
-    overlap = ovrlp(step[2:4], rest)
-    reduce(-, [countincube(o, overlap[i+1:end]) for (i,o) ∈ enumerate(overlap)], init = 0) + vol(step[2:4])
+function ctcube(step, rest)
+    ovp = ovrlp(step[2:4], rest)
+    reduce(-, [ctcube(o, ovp[i+1:end]) for (i,o) ∈ enumerate(ovp)], init = 0) + vol(step[2:4])
 end
 
 const cubes = prs.(input)
 
-f((t, s)) = s[1] == "off" ? 0 : countincube(s, cubes[t+1:end])
+f((t, s)) = s[1] == "off" ? 0 : ctcube(s, cubes[t+1:end])
 proc(inp) = inp |> enumerate .|> f |> sum
 
 @time cubes[1:20] |> proc |> x-> "p1: $(x)" |> println
