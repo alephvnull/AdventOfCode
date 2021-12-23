@@ -32,11 +32,11 @@ const rms2 = Dict(
     l => rrn(5, 1 +2*i) for (i,l) in enumerate(ABCD)
 )
 
-↔(x, y) = x < y ? (x:y-1) : (y+1:x)
+↔(x, y) = x > y ?  (y+1:x) : (x:y-1)
 move(pos, (fx,fy), (tx,ty)) = fy == ty ||
     any((1, i) ∈ keys(pos) for i ∈ (ty ↔ fy)) ||
-    tx ≠ 1 && any((x, ty) ∈ keys(pos) for x ∈ (tx ↔ 1)) ||
-    fx ≠ 1 && any((x, fy) ∈ keys(pos) for x ∈ (1 ↔ fx)) ? false : true
+    fx ≠ 1 && any((x, fy) ∈ keys(pos) for x ∈ (1 ↔ fx)) ||
+    tx ≠ 1 && any((x, ty) ∈ keys(pos) for x ∈ (tx ↔ 1)) ? false : true
 
 const Δ = Dict(
     'A' => 1,
