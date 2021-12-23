@@ -88,6 +88,6 @@ function shortest(mp, rooms)
 end
 
 
-shortest(input1, rms1) |> x-> "p1: $(x)" |> println
+@time shortest(input1, rms1) |> x-> "p1: $(x)" |> println
 
-shortest(input2, rms2) |> x-> "p2: $(x)" |> println
+@time shortest(input2, rms2) |> x-> "p2: $(x)" |> println
