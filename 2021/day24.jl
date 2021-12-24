@@ -10,7 +10,7 @@ function process(x)
     z = 0
     out = zeros(Int, 14)
     idx = 1
-    for i in 1:14
+    for i ∈ 1:14
         t1, t2 = mod1[i], mod2[i]
         if t1 == 0
             out[i] = ((z % 26) - t2)
@@ -27,43 +27,11 @@ end
 
 toprint(arr) = reduce(*, string.(arr))
 function solve(inp)
-    for x in inp
+    for x ∈ inp
         res = process(x)
-        if res != false
-            return res
-        end
+        if res != false return res end
     end
 end
 
 largest  |> solve |> toprint |> x -> "p1: $(x)" |> println
 smallest |> solve |> toprint |> x -> "p2: $(x)" |> println
-
-# def works(x):
-#     z = 0
-#     res = [0] * 14
-
-#     x_idx = 0
-
-#     for i in range(14):
-#         increment, mod_req = steps[i], required[i]
-
-#         if increment == nothing:
-#             assert mod_req != nothing
-#             res[i] = ((z % 26) - mod_req)
-#             z //= 26
-#             if not (1 <= res[i] <= 9):
-#                 return False
-
-#         else:
-#             assert increment != nothing
-#             z = z * 26 + x[x_idx] + increment
-#             res[i] = x[x_idx]
-#             x_idx += 1
-
-#     return res
-
-
-
-
- 
-#println(dd())
