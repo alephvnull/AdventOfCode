@@ -33,4 +33,4 @@ function simulate()
     step
 end
 
-simulate() |> x -> "p1: $(x)" |> println
+@time simulate() |> x -> "p1: $(x)" |> println
