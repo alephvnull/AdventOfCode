@@ -1,9 +1,3 @@
----
-author: "Julia"
-title: "A test"
----
-
-
 # Advent of Code 2021
 
 See https://adventofcode.com/2021 for problems.
